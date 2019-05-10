@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+                <title>UIWebView中OC与JS交互</title>
+                </head>
+    
+    <style type="text/css">
+        .button {
+            background: #f5be14;
+            margin: 10px;
+            text-align: center;
+            width: 300px;
+            height: 44px;
+            line-height: 44px;
+            margin: 10px auto;
+            border-radius: 5px;
+        }
+    #setImage {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+    </style>
+    
+    <body>
+        
+        <div class="button" onclick="firstClick()">今晚打老虎</div>
+        <div class="button" onclick="secondClick()">请用力的点我</div>
+        <div class="button" onclick="thirdClick()">弹我弹我</div>
+        <div class="button" onclick="forthClick()">选择图片</div>
+        <div id="setImage"></div>
+    </body>
+    
+    <script type="text/javascript">
+        
+        var prefixStandard = "LFJSToOC://";
+        
+        function getText(index) {
+            return document.getElementsByClassName("button")[0].innerText;
+        }
+    
+    function firstClick() {
+        var action = "firstClick";
+        var token = getText(0);
+        setUrl(action, token);
+    }
+    
+    function secondClick() {
+        var action = "secondClick";
+        var token = getText(1);
+        setUrl(action, token);
+    }
+    
+    function thirdClick() {
+        var action = "thirdClick";
+        var token = getText(2);
+        setUrl(action, token);
+    }
+    
+    function forthClick() {
+        var action = "forthClick";
+        var token = getText(3);
+        setUrl(action, token);
+    }
+    
+    function setUrl(action, token) {
+        var url = prefixStandard + "/" + action + "/" + token;
+        loadUrl(url);
+    }
+    
+    function loadUrl(url) {
+        window.location.href = url;
+    }
+    
+    function showImageOnDiv(imageStr) {
+        var imgDiv = document.getElementById("setImage");
+        imgDiv.innerHTML = "<image style='width:200px;' src='data:image/png;base64,"+imageStr+"'>";
+    }
+    
+        </script>
+    
+</html>
